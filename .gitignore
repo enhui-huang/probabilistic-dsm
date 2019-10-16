@@ -1,0 +1,12 @@
+.idea/
+data/
+notebooks/
+/results/
+/.env/
+*.pyc
+__pycache__/
+resources/
+run_experiment.py
+*.jpg
+*.pdf
+*.png
