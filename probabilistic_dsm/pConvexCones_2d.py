@@ -17,7 +17,7 @@ class ProbabilisticConvexCones2D:
         assert (isinstance(hull, ProbabilisticConvexHull2D)), "This is not a convex hull!"
         assert (isinstance(extreme_points, np.ndarray)), "The input is not an array"
         assert (len(extreme_points) == len(labels)), "The size of points does not match the size of labels."
-        assert (((labels <= 0) & (labels >= 1)).all()), "The value of a probabilistic label must between -1 and 0."
+        assert (((labels <= 0) & (labels >= -1)).all()), "The value of a probabilistic label must between -1 and 0."
 
         if not isinstance(labels, np.ndarray):
             labels = np.asarray(labels)
@@ -33,9 +33,10 @@ class ProbabilisticConvexCones2D:
     def is_inside(self, test_point):
         res = 0
         new_hull = copy.deepcopy(self.hull)
-        new_hull.add_vertex(self, test_point, 1)
+        new_hull.add_vertex(test_point, 1)
 
-        for extreme_point in self.cone_pairs.keys():
-            res += self.cone_pairs.get(extreme_point) * is_inside(new_hull.pairs, test_point)
+        cone_pairs = self.cone_pairs
+        for extreme_point in cone_pairs.keys():
+            res += cone_pairs.get(extreme_point) * new_hull.is_inside(extreme_point)
 
         return res

@@ -2,7 +2,7 @@ import utils.linear_algebra as la
 import numpy as np
 
 
-def test_get_orientation_coliner():
+def test_get_orientation_colinear():
     o = [1, 4]
     a = [2, 5]
     b = [3, 6]
@@ -27,14 +27,14 @@ def test_is_between_yes():
     o = [1, 4]
     a = [2, 5]
     b = [3, 6]
-    assert la.is_between(o, a, b) == True
+    assert la.is_between(o, b, a) == True
 
 
 def test_is_between_no():
     o = [1, 4]
     a = [2, 5]
     b = [3, 6]
-    assert la.is_between(o, b, a) == False
+    assert la.is_between(o, a, b) == False
 
 
 def test_is_inside_yes():
@@ -55,3 +55,13 @@ def test_is_inside_no():
     assert la.is_inside(pairs, test_point) == 0
 
 
+def test_is_inside_yes_case2():
+    pairs = {tuple([1, 0]): 1, tuple([3, 0]): 1}
+    test_point = np.array([4, 5])
+    assert la.is_inside(pairs, test_point) == 0
+
+
+def test_is_inside_yes_on_boundary_case2():
+    pairs = {tuple([1, 2]): 1, tuple([3, 0]): 1, tuple([5, 6]): 1, tuple([10, 6]): 1}
+    test_point = np.array([6, 6])
+    assert la.is_inside(pairs, test_point) == 1

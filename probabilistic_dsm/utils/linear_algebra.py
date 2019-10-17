@@ -8,7 +8,7 @@ def get_orientation(o, a, b):
     :return: positive if o->a->b is in counter-clockwise order; negative if o->a->b is in clockwise order; zero if
     the three points are colinear
     """
-    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+    return (a[0] - o[0]) * (b[1] - a[1]) - (a[1] - o[1]) * (b[0] - a[0])
 
 
 def is_between(o, a, b):
@@ -16,9 +16,14 @@ def is_between(o, a, b):
     When o, a, b are colinear, further verify whether b is on the line segment oa
     :return: True if b on the line segment oa, False otherwise
     """
-    dot_product = np.linalg.norm(a - o)
-    segment_length = np.linalg.norm(b - o)
-    return True if 0 < dot_product < segment_length else False
+    o = convert_to_array(o)
+    a = convert_to_array(a)
+    b = convert_to_array(b)
+
+    a_norm = np.linalg.norm(a - o)
+    b_norm = np.linalg.norm(b - o)
+    dot_product = np.dot(a-o, b-o)
+    return True if (a_norm > b_norm and dot_product > 0) else False
 
 
 def is_inside(pairs, test_point):
@@ -51,3 +56,10 @@ def is_inside(pairs, test_point):
         p_witness += pairs.get(wp) * p_right
 
     return 1 - (p_empty + p_witness)
+
+
+def convert_to_array(arg):
+    return arg if isinstance(arg, np.ndarray) else np.asarray(arg)
+
+
+
