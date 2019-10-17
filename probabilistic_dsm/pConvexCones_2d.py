@@ -22,13 +22,13 @@ class ProbabilisticConvexCones2D:
         if not isinstance(labels, np.ndarray):
             labels = np.asarray(labels)
 
-        cone_pairs, cone_labels = get_point_label_pairs(extreme_points, labels)
+        cone_pairs, cone_count = get_point_label_pairs(extreme_points, labels)
         self.hull = hull
         self.cone_pairs = cone_pairs
-        self.cone_labels = cone_labels
+        self.cone_count = cone_count
 
     def add_vertex(self, point, label):
-        add_pair(self.cone_pairs, self.cone_labels, point, label)
+        add_pair(self.cone_pairs, self.cone_count, point, label)
 
     def is_inside(self, test_point):
         res = 0
@@ -39,4 +39,4 @@ class ProbabilisticConvexCones2D:
         for extreme_point in cone_pairs.keys():
             res += cone_pairs.get(extreme_point) * new_hull.is_inside(extreme_point)
 
-        return res
+        return max(res, -1)

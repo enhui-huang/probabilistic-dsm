@@ -17,19 +17,19 @@ def cones():
 def test_add_vertex(cones):
     cones.add_vertex(np.array([3, 9]), -1)
     assert cones.cone_pairs == {tuple([3, 10]): -1, tuple([6, 6]): -1, tuple([3, 9]): -1}
-    assert cones.cone_labels == {tuple([3, 10]): 1, tuple([6, 6]): 1, tuple([3, 9]): 1}
+    assert cones.cone_count == {tuple([3, 10]): 1, tuple([6, 6]): 1, tuple([3, 9]): 1}
 
 
 def test_add_vertex_add_duplicates(cones):
     cones.add_vertex(np.array([3, 10]), -1)
     assert cones.cone_pairs == {tuple([3, 10]): -1, tuple([6, 6]): -1}
-    assert cones.cone_labels == {tuple([3, 10]): 2, tuple([6, 6]): 1}
+    assert cones.cone_count == {tuple([3, 10]): 2, tuple([6, 6]): 1}
 
 
 def test_add_vertex_add_uncertain_duplicates(cones):
     cones.add_vertex(np.array([3, 10]), 0.2)
     assert cones.cone_pairs == {tuple([3, 10]): -0.4, tuple([6, 6]): -1}
-    assert cones.cone_labels == {tuple([3, 10]): 2, tuple([6, 6]): 1}
+    assert cones.cone_count == {tuple([3, 10]): 2, tuple([6, 6]): 1}
 
 
 def test_is_inside_yes(cones):

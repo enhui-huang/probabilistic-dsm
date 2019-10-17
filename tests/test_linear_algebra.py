@@ -55,9 +55,21 @@ def test_is_inside_no():
     assert la.is_inside(pairs, test_point) == 0
 
 
-def test_is_inside_yes_case2():
+def test_is_inside_no_case2():
     pairs = {tuple([1, 0]): 1, tuple([3, 0]): 1}
     test_point = np.array([4, 5])
+    assert la.is_inside(pairs, test_point) == 0
+
+
+def test_is_inside_yes_case2():
+    pairs = {tuple([1, 0]): 1, tuple([3, 0]): 1}
+    test_point = np.array([2, 0])
+    assert la.is_inside(pairs, test_point) == 1
+
+
+def test_is_inside_yes_case3():
+    pairs = {tuple([1, 0]): 1, tuple([3, 0]): 1}
+    test_point = np.array([5, 0])
     assert la.is_inside(pairs, test_point) == 0
 
 
