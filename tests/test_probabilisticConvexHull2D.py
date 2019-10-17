@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from pConvexHull_2d import ProbabilisticConvexHull2D
+from p_dsm.pConvexHull_2d import ProbabilisticConvexHull2D
 
 
 @pytest.fixture

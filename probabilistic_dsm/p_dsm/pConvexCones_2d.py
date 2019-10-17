@@ -1,8 +1,7 @@
 import numpy as np
 import copy
-from pConvexHull_2d import ProbabilisticConvexHull2D
+from p_dsm.pConvexHull_2d import ProbabilisticConvexHull2D
 from utils.object_operation import get_point_label_pairs, add_pair
-from utils.linear_algebra import is_inside
 
 
 class ProbabilisticConvexCones2D:

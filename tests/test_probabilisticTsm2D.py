@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from p_tsm import ProbabilisticTsm2D
+from p_dsm.p_tsm import ProbabilisticTsm2D
 
 points = np.array([[1, 2], [3, 0], [5, 6]])
 labels = np.array([1, 1, 1])
